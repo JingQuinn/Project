@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>MGW - {% block pageTitle %}{% endblock %}</title>
-    {% block stylesheets %}
-    <style>
-        label{
-            display: inline-block;
-            float:left;
-            width: 10rem;
-            padding-right: 0.5rem;
-            font-weight:bold;
-            color: blue;
-            text-align: right;
-        }
-        .form-field{
-            padding-bottom: 1rem;
-        }
-    </style>
-    {% endblock %}
-
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-<hr>
-{% block body %}
-{% endblock %}
-
+{% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

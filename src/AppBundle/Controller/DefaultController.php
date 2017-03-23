@@ -13,11 +13,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-       $argsArray = [
-           'name' =>'matt'
-       ];
-
-        $templateName = 'index';
-        return $this->render($templateName.'.html.twig',$argsArray);
+        return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+        ]);
     }
 }
