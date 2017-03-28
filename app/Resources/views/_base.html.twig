@@ -1,13 +1,34 @@
+{% set colours = app.session.get('colours') %}
+    {% if colours is null %}
+        {% set colours = { 'foreground': 'brown',
+        'background': 'lightyellow'
+        }
+        %}
+    {% endif %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+    <style>
+        @import '/css/flash.css';
+        @import '/css/form.css';
+
+        {% block stylesheets %}
+        {% endblock %}
+        body{
+            color:{{ colours['foreground'] }};
+            background-color:{{ colours['background'] }};
+        }
+    </style>
+
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-{% block body %}{% endblock %}
+<hr>
+{% block body %}
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

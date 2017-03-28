@@ -1,0 +1,37 @@
+{% extends '_base.html.twig' %}
+{% block paeTitle %}list of recipes{% endblock %}
+{% block body %}
+
+{% set basket_recipes = app.session.get('basket') %}
+{{ dump(app.session.get('basket')) }}
+{% if basket_recipes is null %}
+<p>
+    You have no recipes in your list
+</p>
+{% else %}
+    <ul>
+        {% for recipe in basket_recipes %}
+        <li>
+            id = {{ recipe.id }}
+            <br>
+            Recipe Title = {{ recipe.recipeTitle }}
+            <br>
+            Recipe Summary = {{ recipe.recipeSummary }}
+            <br>
+            Recipe Steps = {{ recipe.recipeSteps }}
+            <br>
+            Recipe Ingredients = {{ recipe.recipeIngredients }}
+            <br>
+            Author's username = {{ recipe.authorUsername }}
+            <br>
+            Comments = {{ recipe.comments }}
+            <br>
+            <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<p>
+    <a href="{{ path('recipes_basket_clear') }}">Clear all ites in list</a>
+</p>
+{% endblock %}
