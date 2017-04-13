@@ -27,6 +27,20 @@ class TagController extends Controller{
     }
 
     /**
+     * @Route("/tags/index",name="tags_index")
+     */
+    public function indexAction(Request $request){
+        $tagRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
+        $tags = $tagRepository->findAll();
+
+        $argsArray = [
+            'tags' => $tags
+        ];
+
+        $templateName = 'tags/index';
+        return $this->render($templateName.'.html.twig', $argsArray);
+    }
+    /**
      * @param Tag $tag
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

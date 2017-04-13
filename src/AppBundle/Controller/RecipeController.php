@@ -33,6 +33,22 @@ class RecipeController extends Controller
     }
 
     /**
+     * Lists all recipe entities.
+     *
+     * @Route("/list", name="recipe_list")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
+
+        return $this->render('recipe/list.html.twig', array(
+            'recipes' => $recipes,
+        ));
+    }
+    /**
      * Creates a new recipe entity.
      *
      * @Route("/new", name="recipe_new")

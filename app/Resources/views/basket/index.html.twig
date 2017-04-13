@@ -1,9 +1,16 @@
 {% extends '_base.html.twig' %}
 {% block paeTitle %}list of recipes{% endblock %}
 {% block body %}
-
+    <ul>
+        <li>
+            <a href="{{ path('tags_list') }}">List of Tags</a>
+        </li>
+        <li>
+            <a href="{{ path('recipe_index') }}">List of Recipes</a>
+        </li>
+    </ul>
 {% set basket_recipes = app.session.get('basket') %}
-{{ dump(app.session.get('basket')) }}
+
 {% if basket_recipes is null %}
 <p>
     You have no recipes in your list
@@ -12,19 +19,19 @@
     <ul>
         {% for recipe in basket_recipes %}
         <li>
-            id = {{ recipe.id }}
+            id: {{ recipe.id }}
             <br>
-            Recipe Title = {{ recipe.recipeTitle }}
+            Recipe Title: {{ recipe.recipeTitle }}
             <br>
-            Recipe Summary = {{ recipe.recipeSummary }}
+            Recipe Summary: {{ recipe.recipeSummary }}
             <br>
-            Recipe Steps = {{ recipe.recipeSteps }}
+            Recipe Steps: {{ recipe.recipeSteps }}
             <br>
-            Recipe Ingredients = {{ recipe.recipeIngredients }}
+            Recipe Ingredients: {{ recipe.recipeIngredients }}
             <br>
-            Author's username = {{ recipe.authorUsername }}
+            Author's username: {{ recipe.authorUsername }}
             <br>
-            Comments = {{ recipe.comments }}
+            Comments: {{ recipe.comments }}
             <br>
             <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
         </li>

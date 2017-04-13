@@ -57,7 +57,7 @@ class RecipeBasketController extends Controller{
         $id = $recipe->getId();
 
         //only try to add to array if not already in the array
-        if(!array_key_exits($id, $recipes)){
+        if(!array_key_exists($id, $recipes)){
             //append $recipe to list
             $recipes[$id] = $recipe;
 

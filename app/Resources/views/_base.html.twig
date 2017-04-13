@@ -14,7 +14,7 @@
     <style>
         @import '/css/flash.css';
         @import '/css/form.css';
-
+        @import '/css/header.css';
         {% block stylesheets %}
         {% endblock %}
         body{
@@ -26,6 +26,23 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
+
+{% set user = app.session.get('user') %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p>Username: {{ app.user.username }}</p>
+        <p>
+            <a href="{{ path('profile') }}">Go to account</a>
+        </p>
+        <P>
+            <a href="{{ path('admin_index') }}">Go to admin page</a>
+        </P>
+{% else %}
+    <p>
+        error - you are not logged in: <a href="{{ path('login') }}">login</a>
+    </p>
+{% endif %}
+
 <hr>
 {% block body %}
 {% endblock %}
