@@ -3,7 +3,7 @@
 {% block body %}
     <ul>
         <li>
-            <a href="{{ path('tags_list') }}">List of Tags</a>
+            <a href="{{ path('tag_list') }}">List of Tags</a>
         </li>
         <li>
             <a href="{{ path('recipe_index') }}">List of Recipes</a>
@@ -21,17 +21,19 @@
         <li>
             id: {{ recipe.id }}
             <br>
-            Recipe Title: {{ recipe.recipeTitle }}
+            Recipe Title: {{ recipe.title }}
             <br>
-            Recipe Summary: {{ recipe.recipeSummary }}
+            Recipe Summary: {{ recipe.summary }}
             <br>
-            Recipe Steps: {{ recipe.recipeSteps }}
+            Recipe Steps: {{ recipe.steps }}
             <br>
-            Recipe Ingredients: {{ recipe.recipeIngredients }}
+            Recipe Ingredients: {{ recipe.ingredients }}
             <br>
-            Author's username: {{ recipe.authorUsername }}
+            Author's username: {{ recipe.author }}
             <br>
-            Comments: {{ recipe.comments }}
+            Vote Up: {{ recipe.votUp }}
+            <br>
+            Vote Down: {{ recipe.votDown }}
             <br>
             <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
         </li>
@@ -39,6 +41,6 @@
     </ul>
 {% endif %}
 <p>
-    <a href="{{ path('recipes_basket_clear') }}">Clear all ites in list</a>
+    <a href="{{ path('recipes_basket_clear') }}">Clear all items in list</a>
 </p>
 {% endblock %}

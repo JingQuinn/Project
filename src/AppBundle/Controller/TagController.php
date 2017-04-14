@@ -1,155 +1,152 @@
 <?php
+
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
 use AppBundle\Entity\Tag;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
-class TagController extends Controller{
+/**
+ * Tag controller.
+ *
+ * @Route("tag")
+ */
+class TagController extends Controller
+{
     /**
-     * @Route("/tags/list",name="tags_list")
-     */
-    public function listAction(Request $request){
-        $tagRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
-        $tags = $tagRepository->findAll();
-
-        $argsArray = [
-            'tags' => $tags
-        ];
-
-        $templateName = 'tags/list';
-        return $this->render($templateName.'.html.twig', $argsArray);
-    }
-
-    /**
-     * @Route("/tags/index",name="tags_index")
-     */
-    public function indexAction(Request $request){
-        $tagRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
-        $tags = $tagRepository->findAll();
-
-        $argsArray = [
-            'tags' => $tags
-        ];
-
-        $templateName = 'tags/index';
-        return $this->render($templateName.'.html.twig', $argsArray);
-    }
-    /**
-     * @param Tag $tag
+     * Lists all tag entities.
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/", name="tag_index")
+     * @Method("GET")
      */
-    public function createAction(Tag $tag){
-        //entity manager
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
-        //tell Doctrine dwant to save Tag
-        $em->persist($tag);
-        //actually executes queries
-        $em->flush();
 
-        return $this->redirectToRoute('tags_list');
+        $tags = $em->getRepository('AppBundle:Tag')->findAll();
+
+        return $this->render('tag/index.html.twig', array(
+            'tags' => $tags,
+        ));
     }
 
     /**
-     * @Route("tags/delete/{id}")
+     * Lists all tag entities.
+     *
+     * @Route("/list", name="tag_list")
+     * @Method("GET")
      */
-    public function deleteAction($id){
+    public function listAction()
+    {
         $em = $this->getDoctrine()->getManager();
-        $tagRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
 
-        $tag = $tagRepository->find($id);
-        $em->remove($tag);
-        $em->flush();
+        $tags = $em->getRepository('AppBundle:Tag')->findAll();
 
-        return new Response('Deleted tag with id'.$id);
+        return $this->render('tag/list.html.twig', array(
+            'tags' => $tags,
+        ));
     }
-
     /**
-     * @Route("tags/update/{id}/{newName}")
+     * Creates a new tag entity.
+     *
+     * @Route("/new", name="tag_new")
+     * @Method({"GET", "POST"})
      */
-    public function update($id, $newName){
-        $em = $this->getDoctrine()->getManager();
-        $tag = $em->getRepository("AppBundle:Tag")->find($id);
-
-        if(!$tag){
-            throw $this->createNotFoundException("No tag found for id".$id);
-        }
-        $tag->setName($newName);
-        $em->flush();
-
-        return $this->redirectToRoute('homepage');
-    }
-
-    /**
-     * @Route("/tags/show/{id}",name="tags_show")
-     */
-    public function showAction($id){
-        $em = $this->getDoctrine()->getManager();
-        $tag = $em->getRepository('AppBundle:Tag')->find($id);
-
-        if(!$tag){
-            throw $this->createNotFoundException('No tag found for id '.$id);
-        }
-
-        $argsArray =[
-            'tag' => $tag
-        ];
-
-        $templateName = 'tag/show';
-        return $this->render($templateName.'.html.twig',$argsArray);
-    }
-
-    /**
-     * @Route("/tags/new",name="tags_new_form")
-     */
-    public function newFormAction(Request $request){
-        //create a task and give it some dummy data
+    public function newAction(Request $request)
+    {
         $tag = new Tag();
-
-        $form = $this->createFormBuilder($tag)
-            ->add('name', TextType::class)
-            ->add('save', SubmitType::class, array('label'=>'Create Tag'))
-            ->getForm();
-
-        //start process POST submission of form
+        $form = $this->createForm('AppBundle\Form\TagType', $tag);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $tag = $form->getData();
-            return $this->createAction($tag);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tag);
+            $em->flush($tag);
+
+            return $this->redirectToRoute('tag_show', array('id' => $tag->getId()));
         }
 
-        $argsArray=[
+        return $this->render('tag/new.html.twig', array(
+            'tag' => $tag,
             'form' => $form->createView(),
-        ];
-
-        $templateName = 'tags/new';
-        return $this->render($templateName.'.html.twig',$argsArray);
+        ));
     }
 
     /**
-     * @Route("/tags/processNewForm",name="tags_process_new_form")
+     * Finds and displays a tag entity.
+     *
+     * @Route("/{id}", name="tag_show")
+     * @Method("GET")
      */
-    public function processNewFormAction(Request $request)
+    public function showAction(Tag $tag)
     {
-        //extrace 'name' parameter from POST data
-        $name = $request->request->get('name');
+        $deleteForm = $this->createDeleteForm($tag);
 
-        if (empty($name)) {
-            $this->addFlash(
-                'error',
-                'tag name cannot be an empty'
-            );
-            //forward this to the createdAction() method
-            return $this->newFormAction($name);
+        return $this->render('tag/show.html.twig', array(
+            'tag' => $tag,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing tag entity.
+     *
+     * @Route("/{id}/edit", name="tag_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Tag $tag)
+    {
+        $deleteForm = $this->createDeleteForm($tag);
+        $editForm = $this->createForm('AppBundle\Form\TagType', $tag);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('tag_edit', array('id' => $tag->getId()));
         }
-        //forward this to the createAction() method
-        return $this->createAction($name);
+
+        return $this->render('tag/edit.html.twig', array(
+            'tag' => $tag,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a tag entity.
+     *
+     * @Route("/{id}", name="tag_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Tag $tag)
+    {
+        $form = $this->createDeleteForm($tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($tag);
+            $em->flush($tag);
+        }
+
+        return $this->redirectToRoute('tag_index');
+    }
+
+    /**
+     * Creates a form to delete a tag entity.
+     *
+     * @param Tag $tag The tag entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Tag $tag)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('tag_delete', array('id' => $tag->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 }

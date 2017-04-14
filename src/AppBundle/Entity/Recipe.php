@@ -24,44 +24,51 @@ class Recipe
     /**
      * @var string
      *
-     * @ORM\Column(name="recipeTitle", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $recipeTitle;
+    private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="recipeSummary", type="string", length=255)
+     * @ORM\Column(name="summary", type="string", length=255)
      */
-    private $recipeSummary;
+    private $summary;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="recipeSteps", type="string", length=255)
+     * @ORM\Column(name="steps", type="string", length=255)
      */
-    private $recipeSteps;
+    private $steps;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="recipeIngredients", type="string", length=255)
+     * @ORM\Column(name="ingredients", type="string", length=255)
      */
-    private $recipeIngredients;
+    private $ingredients;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="authorUsername", type="string", length=255)
+     * @ORM\Column(name="author", type="string", length=255)
      */
-    private $authorUsername;
+    private $author;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="comments", type="string", length=255)
+     * @ORM\Column(name="votDown", type="integer")
      */
-    private $comments;
+    private $votDown;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="votUp", type="integer")
+     */
+    private $votUp;
 
 
     /**
@@ -75,147 +82,171 @@ class Recipe
     }
 
     /**
-     * Set recipeTitle
+     * Set title
      *
-     * @param string $recipeTitle
+     * @param string $title
      *
      * @return Recipe
      */
-    public function setRecipeTitle($recipeTitle)
+    public function setTitle($title)
     {
-        $this->recipeTitle = $recipeTitle;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get recipeTitle
+     * Get title
      *
      * @return string
      */
-    public function getRecipeTitle()
+    public function getTitle()
     {
-        return $this->recipeTitle;
+        return $this->title;
     }
 
     /**
-     * Set recipeSummary
+     * Set summary
      *
-     * @param string $recipeSummary
+     * @param string $summary
      *
      * @return Recipe
      */
-    public function setRecipeSummary($recipeSummary)
+    public function setSummary($summary)
     {
-        $this->recipeSummary = $recipeSummary;
+        $this->summary = $summary;
 
         return $this;
     }
 
     /**
-     * Get recipeSummary
+     * Get summary
      *
      * @return string
      */
-    public function getRecipeSummary()
+    public function getSummary()
     {
-        return $this->recipeSummary;
+        return $this->summary;
     }
 
     /**
-     * Set recipeSteps
+     * Set steps
      *
-     * @param string $recipeSteps
+     * @param string $steps
      *
      * @return Recipe
      */
-    public function setRecipeSteps($recipeSteps)
+    public function setSteps($steps)
     {
-        $this->recipeSteps = $recipeSteps;
+        $this->steps = $steps;
 
         return $this;
     }
 
     /**
-     * Get recipeSteps
+     * Get steps
      *
      * @return string
      */
-    public function getRecipeSteps()
+    public function getSteps()
     {
-        return $this->recipeSteps;
+        return $this->steps;
     }
 
     /**
-     * Set recipeIngredients
+     * Set ingredients
      *
-     * @param string $recipeIngredients
+     * @param string $ingredients
      *
      * @return Recipe
      */
-    public function setRecipeIngredients($recipeIngredients)
+    public function setIngredients($ingredients)
     {
-        $this->recipeIngredients = $recipeIngredients;
+        $this->ingredients = $ingredients;
 
         return $this;
     }
 
     /**
-     * Get recipeIngredients
+     * Get ingredients
      *
      * @return string
      */
-    public function getRecipeIngredients()
+    public function getIngredients()
     {
-        return $this->recipeIngredients;
+        return $this->ingredients;
     }
 
     /**
-     * Set authorUsername
+     * Set author
      *
-     * @param string $authorUsername
+     * @param string $author
      *
      * @return Recipe
      */
-    public function setAuthorUsername($authorUsername)
+    public function setAuthor($author)
     {
-        $this->authorUsername = $authorUsername;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get authorUsername
+     * Get author
      *
      * @return string
      */
-    public function getAuthorUsername()
+    public function getAuthor()
     {
-        return $this->authorUsername;
+        return $this->author;
     }
 
     /**
-     * Set comments
+     * Set votDown
      *
-     * @param string $comments
+     * @param integer $votDown
      *
      * @return Recipe
      */
-    public function setComments($comments)
+    public function setVotDown($votDown)
     {
-        $this->comments = $comments;
+        $this->votDown = $votDown;
 
         return $this;
     }
 
     /**
-     * Get comments
+     * Get votDown
      *
-     * @return string
+     * @return int
      */
-    public function getComments()
+    public function getVotDown()
     {
-        return $this->comments;
+        return $this->votDown;
+    }
+
+    /**
+     * Set votUp
+     *
+     * @param integer $votUp
+     *
+     * @return Recipe
+     */
+    public function setVotUp($votUp)
+    {
+        $this->votUp = $votUp;
+
+        return $this;
+    }
+
+    /**
+     * Get votUp
+     *
+     * @return int
+     */
+    public function getVotUp()
+    {
+        return $this->votUp;
     }
 }
 

@@ -5,8 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Recipe controller.
@@ -31,7 +30,6 @@ class RecipeController extends Controller
             'recipes' => $recipes,
         ));
     }
-
     /**
      * Lists all recipe entities.
      *

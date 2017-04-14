@@ -1,0 +1,28 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <h1>Tags list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ tag.id }}</td>
+                <td>{{ tag.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <a href="{{ path('homepage') }}">back to home page</a>
+        </li>
+    </ul>
+{% endblock %}

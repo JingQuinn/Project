@@ -1,9 +1,5 @@
 {% extends '_base.html.twig' %}
 
-{% block stylesheets %}
-    @import '/css/table.css';
-{% endblock %}
-
 {% block body %}
     <h1>Recipes list</h1>
 
@@ -15,43 +11,27 @@
             <th>Summary</th>
             <th>Steps</th>
             <th>Ingredients</th>
-            <th>Authoruser</th>
-            <th>Comments</th>
-            <th>Actions</th>
+            <th>Author</th>
+            <th>Votdown</th>
+            <th>Votup</th>
         </tr>
         </thead>
         <tbody>
         {% for recipe in recipes %}
             <tr>
-                <td><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.id }}</a></td>
-                <td>{{ recipe.recipeTitle }}</td>
-                <td>{{ recipe.recipeSummary }}</td>
-                <td>{{ recipe.recipeSteps }}</td>
-                <td>{{ recipe.recipeIngredients }}</td>
-                <td>{{ recipe.authorUsername }}</td>
-                <td>{{ recipe.comments }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">edit</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('recipes_basket_add',{'id':recipe.id}) }}">add</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.title }}</td>
+                <td>{{ recipe.summary }}</td>
+                <td>{{ recipe.steps }}</td>
+                <td>{{ recipe.ingredients }}</td>
+                <td>{{ recipe.author }}</td>
+                <td>{{ recipe.votDown }}</td>
+                <td>{{ recipe.votUp }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
     <ul>
-        <li>
-            <a href="{{ path('recipe_new') }}">Create a new recipe</a>
-        </li>
         <li>
             <a href="{{ path('homepage') }}">back to home page</a>
         </li>
