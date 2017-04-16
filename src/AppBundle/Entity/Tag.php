@@ -25,6 +25,7 @@ class Tag
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Recipe")
      */
     private $name;
 
@@ -62,5 +63,7 @@ class Tag
     {
         return $this->name;
     }
+    public function __toString(){
+        return $this->getName(); // or you can use any other method to retrurn value
+    }
 }
-

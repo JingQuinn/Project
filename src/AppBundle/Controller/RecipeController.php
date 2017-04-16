@@ -30,6 +30,7 @@ class RecipeController extends Controller
             'recipes' => $recipes,
         ));
     }
+
     /**
      * Lists all recipe entities.
      *
@@ -46,6 +47,7 @@ class RecipeController extends Controller
             'recipes' => $recipes,
         ));
     }
+
     /**
      * Creates a new recipe entity.
      *
@@ -84,9 +86,11 @@ class RecipeController extends Controller
 
         return $this->render('recipe/show.html.twig', array(
             'recipe' => $recipe,
+            //'tags' => $tags,
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
 
     /**
      * Displays a form to edit an existing recipe entity.

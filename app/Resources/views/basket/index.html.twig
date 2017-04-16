@@ -1,14 +1,7 @@
 {% extends '_base.html.twig' %}
 {% block paeTitle %}list of recipes{% endblock %}
 {% block body %}
-    <ul>
-        <li>
-            <a href="{{ path('tag_list') }}">List of Tags</a>
-        </li>
-        <li>
-            <a href="{{ path('recipe_index') }}">List of Recipes</a>
-        </li>
-    </ul>
+ <h1>Collected Recipes:</h1>
 {% set basket_recipes = app.session.get('basket') %}
 
 {% if basket_recipes is null %}
@@ -21,20 +14,17 @@
         <li>
             id: {{ recipe.id }}
             <br>
-            Recipe Title: {{ recipe.title }}
+            <strong>Recipe Title:</strong> {{ recipe.title }}
             <br>
-            Recipe Summary: {{ recipe.summary }}
+            <strong>Recipe Summary:</strong> {{ recipe.summary }}
             <br>
-            Recipe Steps: {{ recipe.steps }}
+            <strong>Recipe Steps:</strong> {{ recipe.steps }}
             <br>
-            Recipe Ingredients: {{ recipe.ingredients }}
+            <strong>Recipe Ingredients:</strong> {{ recipe.ingredients }}
             <br>
-            Author's username: {{ recipe.author }}
+            <strong>Author's name:</strong> {{ recipe.author }}
             <br>
-            Vote Up: {{ recipe.votUp }}
-            <br>
-            Vote Down: {{ recipe.votDown }}
-            <br>
+
             <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
         </li>
         {% endfor %}

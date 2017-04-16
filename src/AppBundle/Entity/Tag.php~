@@ -1,31 +1,43 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Tag
- * @package AppBundle\Entity
- * @ORM\Entity
- * @ORM\Table(name="recipedb")
+ * Tag
+ *
+ * @ORM\Table(name="tag")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository")
  */
 class Tag
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string",length=100)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Recipe")
      */
     private $name;
 
-    public function __construct($id,$name){
-        $this->id = $id;
-        $this->name = $name;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -41,4 +53,15 @@ class Tag
 
         return $this;
     }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }
+
