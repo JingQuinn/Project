@@ -63,5 +63,7 @@ class Tag
     {
         return $this->name;
     }
+    public function __toString(){
+        return $this->getName(); // or you can use any other method to retrurn value
+    }
 }
-

@@ -57,6 +57,22 @@ class Recipe
     private $author;
 
     /**
+     * @var \AppBundle\Entity\Tag
+     *
+     * @ORM\ManyToOne(targetEntity="Tag")
+     * @ORM\JoinColumn(name="tag_id",referencedColumnName="id")
+     */
+    private $tag;
+
+    /**
+     * @var \AppBundle\Entity\Comment
+     *
+     * @ORM\ManyToOne(targetEntity="Comment")
+     * @ORM\JoinColumn(name="comment_id",referencedColumnName="id")
+     */
+    private $comment;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="votDown", type="integer")
@@ -69,14 +85,6 @@ class Recipe
      * @ORM\Column(name="votUp", type="integer")
      */
     private $votUp;
-
-    /**
-     * @var \AppBundle\Entity\Tag
-     *
-     * @ORM\ManyToOne(targetEntity="Tag")
-     * @ORM\JoinColumn(name="tag_id",referencedColumnName="id")
-     */
-    private $tag;
 
 
     /**
@@ -210,6 +218,54 @@ class Recipe
     }
 
     /**
+     * Set tag
+     *
+     * @param string $tag
+     *
+     * @return Recipe
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Recipe
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
      * Set votDown
      *
      * @param integer $votDown
@@ -256,28 +312,5 @@ class Recipe
     {
         return $this->votUp;
     }
-
-    /**
-     * Set tag
-     *
-     * @param string $tag
-     *
-     * @return Recipe
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
 }
+

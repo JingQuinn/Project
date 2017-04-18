@@ -1,16 +1,16 @@
 {% extends '_base.html.twig' %}
 
 {% block body %}
-    <h1>Collection Recipe creation</h1>
+    <h1>Search</h1>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Share to public" />
+    <input type="submit" value="Search" />
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('recipes_basket_index') }}">Back to the list</a>
+            <a href="{{ path('tag_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}

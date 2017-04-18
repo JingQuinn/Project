@@ -1,5 +1,7 @@
 {% extends '_base.html.twig' %}
-
+{% block stylesheets %}
+    @import '/css/table.css';
+{% endblock %}
 {% block body %}
     <h1>Recipe</h1>
 
@@ -37,10 +39,13 @@
                 <th>Votup</th>
                 <td>{{ recipe.votUp }}</td>
             </tr>
-
             <tr>
                 <th>Tag</th>
                 <td>{{ recipe.tag }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ recipe.comment }}</td>
             </tr>
         </tbody>
     </table>

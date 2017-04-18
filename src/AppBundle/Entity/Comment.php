@@ -25,6 +25,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Recipe",mappedBy="comment")
      */
     private $name;
 
@@ -61,5 +62,9 @@ class Comment
     public function getName()
     {
         return $this->name;
+    }
+
+    public function __toString(){
+        return $this->getName(); // or you can use any other method to retrurn value
     }
 }

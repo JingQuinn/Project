@@ -1,36 +1,55 @@
 {% extends '_base.html.twig' %}
+{% block stylesheets %}
+    @import '/css/table.css';
+{% endblock %}
 {% block paeTitle %}list of recipes{% endblock %}
 {% block body %}
- <h1>Collected Recipes:</h1>
+ <h1>Recipes Lists:</h1>
 {% set basket_recipes = app.session.get('basket') %}
 
 {% if basket_recipes is null %}
 <p>
-    You have no recipes in your list
+    There are no recipes in the lists.
 </p>
 {% else %}
-    <ul>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Summary</th>
+            <th>Steps</th>
+            <th>Ingredients</th>
+            <th>Author</th>
+            <th>Votdown</th>
+            <th>Votup</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for recipe in basket_recipes %}
-        <li>
-            id: {{ recipe.id }}
-            <br>
-            <strong>Recipe Title:</strong> {{ recipe.title }}
-            <br>
-            <strong>Recipe Summary:</strong> {{ recipe.summary }}
-            <br>
-            <strong>Recipe Steps:</strong> {{ recipe.steps }}
-            <br>
-            <strong>Recipe Ingredients:</strong> {{ recipe.ingredients }}
-            <br>
-            <strong>Author's name:</strong> {{ recipe.author }}
-            <br>
-
-            <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
-        </li>
+            <tr>
+                <td><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.id }}</a></td>
+                <td>{{ recipe.title }}</td>
+                <td>{{ recipe.summary }}</td>
+                <td>{{ recipe.steps }}</td>
+                <td>{{ recipe.ingredients }}</td>
+                <td>{{ recipe.author }}</td>
+                <td>{{ recipe.votDown }}</td>
+                <td>{{ recipe.votUp }}</td>
+                <td>
+                    <ul>
+                        <a href="{{ path('recipes_basket_delete',{'id':recipe.id}) }}">(remove)</a>
+                    </ul>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+
 {% endif %}
 <p>
     <a href="{{ path('recipes_basket_clear') }}">Clear all items in list</a>
 </p>
+
 {% endblock %}

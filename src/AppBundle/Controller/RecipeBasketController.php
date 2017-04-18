@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Recipe;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class RecipeBasketController
@@ -32,6 +34,22 @@ class RecipeBasketController extends Controller{
     }
 
     /**
+     * Lists all recipe entities.
+     *
+     * @Route("/list", name="recipes_basket_list")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
+
+        return $this->render('basket/list.html.twig', array(
+            'recipes' => $recipes,
+        ));
+    }
+    /**
      * @Route("/clear",name="recipes_basket_clear")
      */
     public function clearAction(){
@@ -41,6 +59,31 @@ class RecipeBasketController extends Controller{
         return $this->redirectToRoute('recipes_basket_index');
     }
 
+    /**
+     * Creates a new recipe entity.
+     *
+     * @Route("/new", name="recipes_basket_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $recipe = new Recipe();
+        $form = $this->createForm('AppBundle\Form\RecipeType', $recipe);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($recipe);
+            $em->flush($recipe);
+
+            return $this->redirectToRoute('recipes_basket_index', array('id' => $recipe->getId()));
+        }
+
+        return $this->render('basket/new.html.twig', array(
+            'recipe' => $recipe,
+            'form' => $form->createView(),
+        ));
+    }
     /**
      * @Route("/add/{id}",name="recipes_basket_add")
      */

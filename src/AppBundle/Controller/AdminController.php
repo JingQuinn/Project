@@ -36,4 +36,5 @@ class AdminController extends Controller{
         $templateName = '/admin/index';
         return $this->render($templateName.'.html.twig');
     }
+
 }

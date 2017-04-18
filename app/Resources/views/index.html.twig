@@ -3,13 +3,16 @@
 
 {% block body %}
     <h1>Welcome to Recipt Website</h1>
-    <ul>
-        <li>
-            <a href="{{ path('tag_list') }}">Tags List</a>
-        </li>
-        <li>
-            <a href="{{ path('recipe_list') }}">Recipes published</a>
-        </li>
 
-    </ul>
+        <p>
+            <a href="{{ path('tag_list') }}">Tags List</a>
+        </p>
+        <p>
+            <a href="{{ path('comment_list') }}">Comment list</a>
+        </p>
+        <p>
+            <a href="{{ path('recipe_list') }}">Recipes published</a>
+        </p>
+
+
 {% endblock %}

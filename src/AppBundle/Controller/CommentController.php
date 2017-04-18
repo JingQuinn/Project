@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,24 @@ class CommentController extends Controller
         ));
     }
 
+    /**
+     * Lists all comment entities.
+     *
+     * @Route("/list", name="comment_list")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $comments = $em->getRepository('AppBundle:Comment')->findAll();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
+
+        return $this->render('comment/list.html.twig', array(
+            'comments' => $comments,
+            'recipes' => $recipes,
+        ));
+    }
     /**
      * Creates a new comment entity.
      *
@@ -98,6 +117,7 @@ class CommentController extends Controller
         ));
     }
 
+
     /**
      * Deletes a comment entity.
      *
@@ -117,7 +137,6 @@ class CommentController extends Controller
 
         return $this->redirectToRoute('comment_index');
     }
-
     /**
      * Creates a form to delete a comment entity.
      *

@@ -1,7 +1,9 @@
 {% extends '_base.html.twig' %}
-
+{% block stylesheets %}
+    @import '/css/table.css';
+{% endblock %}
 {% block body %}
-    <h1>Recipes list</h1>
+    <h1>Recipes Collection lists</h1>
 
     <table>
         <thead>
@@ -15,6 +17,7 @@
                 <th>Votdown</th>
                 <th>Votup</th>
                 <th>Tag</th>
+                <th>Comment</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,6 +33,7 @@
                 <td>{{ recipe.votDown }}</td>
                 <td>{{ recipe.votUp }}</td>
                 <td>{{ recipe.tag }}</td>
+                <td>{{ recipe.comment }}</td>
                 <td>
                     <ul>
                         <li>
@@ -38,7 +42,12 @@
                         <li>
                             <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">edit</a>
                         </li>
-
+                        <li>
+                            <a href="{{ path('recipes_basket_add',{'id':recipe.id })}}">save</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('comment_index') }}">Add Comment</a>
+                        </li>
                     </ul>
                 </td>
             </tr>

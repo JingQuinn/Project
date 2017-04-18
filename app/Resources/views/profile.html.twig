@@ -3,16 +3,21 @@
 
 {% block body %}
     <h1>Welcom to your account</h1>
-    <ul>
-        <li>
-            <a href="{{ path('tag_index') }}">Tags list</a>
-        </li>
-        <li>
-            <a href="{{ path('recipe_index') }}">Recipes list(public)</a>
-        </li>
-        <li>
-            <a href="{{ path('recipes_basket_index') }}">Collections of recipes(private)</a>
-        </li>
-    </ul>
+    <p>
+        <a href="{{ path('tag_index') }}">Tags list</a>
+    </p>
+    <p>
+        <a href="{{ path('comment_index') }}">Comments list</a>
+    </p>
+    <p>
+        <a href="{{ path('recipe_index') }}">Recipes list(public)</a>
+    </p>
+    <p>
+        <a href="{{ path('recipes_basket_index') }}">Collections of recipes(private)</a>
+    </p>
+    <p>
+        <a href="{{ path('homepage') }}">Back to home page</a>
+    </p>
+
 
 {% endblock %}

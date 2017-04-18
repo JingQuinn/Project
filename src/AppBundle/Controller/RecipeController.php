@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Recipe;
+use AppBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Recipe controller.
@@ -47,7 +50,6 @@ class RecipeController extends Controller
             'recipes' => $recipes,
         ));
     }
-
     /**
      * Creates a new recipe entity.
      *
@@ -86,11 +88,9 @@ class RecipeController extends Controller
 
         return $this->render('recipe/show.html.twig', array(
             'recipe' => $recipe,
-            //'tags' => $tags,
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
 
     /**
      * Displays a form to edit an existing recipe entity.
