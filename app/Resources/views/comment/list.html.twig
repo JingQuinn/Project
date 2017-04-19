@@ -1,13 +1,18 @@
 {% extends '_base.html.twig' %}
-
+{% block stylesheets %}
+    @import '/css/table.css';
+{% endblock %}
 {% block body %}
+    <p>
+        <a href="{{ path('homepage') }}">Back to home page</a>
+    </p>
     <h1>Comments list</h1>
 
     <table>
         <thead>
         <tr>
             <th>Id</th>
-            <th>Comment</th>
+            <th>Comment list</th>
         </tr>
         </thead>
         <tbody>
@@ -20,9 +25,25 @@
         </tbody>
     </table>
 
+    <h1>Recipe's comment list</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Recipe Title</th>
+            <th>Recipe Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.title }}</td>
+                <td>{{ recipe.comment }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    <p>
-        <a href="{{ path('homepage') }}">Back to home page</a>
-    </p>
 
 {% endblock %}

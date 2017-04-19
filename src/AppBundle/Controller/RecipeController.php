@@ -44,9 +44,43 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAllPublic();
 
         return $this->render('recipe/list.html.twig', array(
+            'recipes' => $recipes,
+        ));
+    }
+
+    /**
+     * Lists all recipe entities.
+     *
+     * @Route("/listPrivate", name="recipe_list_private")
+     * @Method("GET")
+     */
+    public function listPrivateAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAllPrivate();
+
+        return $this->render('recipe/listPrivate.html.twig', array(
+            'recipes' => $recipes,
+        ));
+    }
+
+    /**
+     * Lists all recipe entities.
+     *
+     * @Route("/search", name="recipe_search")
+     * @Method("GET")
+     */
+    public function searchAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipes = $em->getRepository('AppBundle:Recipe')->findOneByIdJoinedToTag();
+
+        return $this->render('recipe/search.html.twig', array(
             'recipes' => $recipes,
         ));
     }
@@ -75,6 +109,7 @@ class RecipeController extends Controller
             'form' => $form->createView(),
         ));
     }
+
 
     /**
      * Finds and displays a recipe entity.

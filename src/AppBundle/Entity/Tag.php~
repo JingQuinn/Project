@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tag
@@ -29,6 +30,9 @@ class Tag
      */
     private $name;
 
+    public function __construct(){
+        $this->name = new ArrayCollection();
+    }
 
     /**
      * Get id

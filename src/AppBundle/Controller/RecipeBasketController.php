@@ -31,6 +31,7 @@ class RecipeBasketController extends Controller{
 
         $templateName = "basket/index";
         return $this->render($templateName.'.html.twig',$argsArray);
+
     }
 
     /**

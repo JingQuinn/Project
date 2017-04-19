@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Recipe
+ * Collection
  *
- * @ORM\Table(name="recipe")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RecipeRepository")
+ * @ORM\Table(name="collection")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CollectionRepository")
  */
-class Recipe
+class Collection
 {
     /**
      * @var int
@@ -57,6 +57,20 @@ class Recipe
     private $author;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="votDown", type="integer")
+     */
+    private $votDown;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="votUp", type="integer")
+     */
+    private $votUp;
+
+    /**
      * @var \AppBundle\Entity\Tag
      *
      * @ORM\ManyToOne(targetEntity="Tag")
@@ -72,19 +86,21 @@ class Recipe
      */
     private $comment;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="votDown", type="integer")
-     */
-    private $votDown;
 
     /**
-     * @var int
+     * @var \AppBundle\Entity\Recipe
      *
-     * @ORM\Column(name="votUp", type="integer")
+     * @ORM\ManyToOne(targetEntity="Recipe")
+     * @ORM\JoinColumn(name="recipe_id",referencedColumnName="id")
      */
-    private $votUp;
+    private $recipe;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
 
 
     /**
@@ -102,7 +118,7 @@ class Recipe
      *
      * @param string $title
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setTitle($title)
     {
@@ -126,7 +142,7 @@ class Recipe
      *
      * @param string $summary
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setSummary($summary)
     {
@@ -150,7 +166,7 @@ class Recipe
      *
      * @param string $steps
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setSteps($steps)
     {
@@ -174,7 +190,7 @@ class Recipe
      *
      * @param string $ingredients
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setIngredients($ingredients)
     {
@@ -198,7 +214,7 @@ class Recipe
      *
      * @param string $author
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setAuthor($author)
     {
@@ -218,59 +234,11 @@ class Recipe
     }
 
     /**
-     * Set tag
-     *
-     * @param string $tag
-     *
-     * @return Recipe
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     *
-     * @return Recipe
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
      * Set votDown
      *
      * @param integer $votDown
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setVotDown($votDown)
     {
@@ -294,7 +262,7 @@ class Recipe
      *
      * @param integer $votUp
      *
-     * @return Recipe
+     * @return Collection
      */
     public function setVotUp($votUp)
     {
@@ -313,4 +281,100 @@ class Recipe
         return $this->votUp;
     }
 
+    /**
+     * Set tag
+     *
+     * @param string $tag
+     *
+     * @return Collection
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Collection
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set recipe
+     *
+     * @param string $recipe
+     *
+     * @return Collection
+     */
+    public function setRecipe($recipe)
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * Get recipe
+     *
+     * @return string
+     */
+    public function getRecipe()
+    {
+        return $this->recipe;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Collection
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 }
+

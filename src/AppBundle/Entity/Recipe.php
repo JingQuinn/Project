@@ -86,6 +86,35 @@ class Recipe
      */
     private $votUp;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="visibility", type="integer")
+     */
+    private $visibility;
+
+    /**
+     * Get visibility
+     *
+     * @return int
+     */
+    public function getVisibility()
+    {
+        return $this->visibility;
+    }
+
+    /**
+     * Set visibility
+     *
+     * @param int $visibility
+     *
+     * @return Recipe
+     */
+    public function setVisibility($visibility)
+    {
+        $this->visibility = $visibility;
+    }
+
 
     /**
      * Get id

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,53 +44,14 @@ class TagController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $tags = $em->getRepository('AppBundle:Tag')->findAll();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
 
         return $this->render('tag/list.html.twig', array(
             'tags' => $tags,
+            'recipes' => $recipes,
         ));
     }
 
-    /**
-     * Lists all tag entities.
-     *
-     * @Route("/search", name="tag_search")
-     * @Method("GET")
-     */
-    public function searchAction(Request $request)
-    {
-        $tag = new Tag();
-        $form = $this->createForm('AppBundle\Form\TagType', $tag);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('tag_edit', array('id' => $tag->getId()));
-        }
-
-        return $this->render('tag/search.html.twig', array(
-            'tag' => $tag,
-            'form' => $form->createView(),
-        ));
-
-
-        //$name = $this->getDoctrine()->getRepository('AppBundle:Tag')->find($id);
-        //$recipe = $name->getRecipes()->getName();
-
-        /*$em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery( 'SELECT * FROM AppBundle: Tag t JOIN t.Recipe r WHERE t.id=:id')->setParameter('id',$id);
-
-        try{
-            return $query->getResult();
-        }catch(\Doctrine\ORM\NoResultException $e){
-            return null;
-        }*/
-
-        //return $this->render('tag/search.html.twig', array(
-          //  'tag' => $name,
-           // 'delete_form' => $deleteForm->createView(),
-        //));
-    }
     /**
      * Creates a new tag entity.
      *
