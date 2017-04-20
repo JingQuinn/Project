@@ -3,6 +3,10 @@
 {% block body %}
     <h1>Tags list</h1>
 
+    <p>
+        <a href="{{ path('tag_new') }}">Create a new tag</a>
+    </p>
+
     <table>
         <thead>
             <tr>
@@ -30,12 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <p>
-        <a href="{{ path('tag_new') }}">Create a new tag</a>
-    </p>
-    <p>
-        <a href="{{ path('profile') }}">Back to account</a>
-    </p>
 
 {% endblock %}

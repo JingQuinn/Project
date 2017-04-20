@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Recipe
@@ -94,6 +96,82 @@ class Recipe
     private $visibility;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="summaryImage", type="string", length=255)
+     *
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 400,
+     *     minHeight = 150,
+     *     maxHeight = 400
+     * )
+     */
+    private $summaryImage;
+
+    /**
+     * Set summaryImage
+     *
+     * @param string $summaryImage
+     *
+     * @return Recipe
+     */
+    public function setSummaryImage(File $file = null)
+    {
+        $this->summaryImage = $file;
+
+        //return $this;
+    }
+
+    /**
+     * Get summaryImage
+     *
+     * @return string
+     */
+    public function getSummaryImage()
+    {
+        return $this->summaryImage;
+    }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stepImage", type="string", length=255)
+     *
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 400,
+     *     minHeight = 150,
+     *     maxHeight = 400
+     * )
+     */
+    private $stepImage;
+
+    /**
+     * Set stepImage
+     *
+     * @param string $stepImage
+     *
+     * @return Recipe
+     */
+    public function setStepImage(File $file = null)
+    {
+        $this->stepImage = $file;
+
+        //return $this;
+    }
+
+    /**
+     * Get summaryImage
+     *
+     * @return string
+     */
+    public function getStepImage()
+    {
+        return $this->stepImage;
+    }
+
+    /**
      * Get visibility
      *
      * @return int
@@ -115,6 +193,34 @@ class Recipe
         $this->visibility = $visibility;
     }
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * Get datetime
+     *
+     * @return datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set datetime
+     *
+     * @param datetime $date
+     *
+     * @return Recipe
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
 
     /**
      * Get id

@@ -3,6 +3,10 @@
 {% block body %}
     <h1>Comments list</h1>
 
+    <p>
+        <a href="{{ path('comment_new') }}">Create a new comment</a>
+    </p>
+
     <table>
         <thead>
             <tr>
@@ -31,9 +35,4 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('comment_new') }}">Create a new comment</a>
-        </li>
-    </ul>
 {% endblock %}

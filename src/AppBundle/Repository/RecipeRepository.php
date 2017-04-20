@@ -28,6 +28,16 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    public function findDateASC()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT r FROM AppBundle:recipe r ORDER BY r.date ASC'
+            )
+            ->getResult();
+    }
+
+
     public function findOneByIdJoinedToTag()
     {
         /*$query = $this->getEntityManager()
@@ -44,9 +54,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }*/
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT r, t )
-->(FROM AppBundle:Recipe r JOIN r.tag t)
- ->(WHERE r.id = :id'
+                //'SELECT r, t FROM AppBundle:Recipe r JOIN r.tag t WHERE r.id = 1
+                'SELECT r FROM AppBundle:recipe r WHERE r.visibility = 1'
             )
             ->getResult();
     }

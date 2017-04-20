@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 
 class RecipeType extends AbstractType
@@ -18,20 +20,38 @@ class RecipeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('summary')->add('steps')->add('ingredients')->add('author')->add('votDown')->add('votUp')       ;
+        $builder->add('title')->add('summary');
+        $builder->add('summaryImage', FIleType::class, array(
+            'data_class' => null,
+        ));
+        $builder->add('steps');
+        $builder->add('stepImage', FIleType::class, array(
+            'data_class' => null,
+        ));
+        $builder->add('ingredients')->add('author')->add('votDown')->add('votUp')       ;
         $builder->add('tag',EntityType::class,[
             'class'=>'AppBundle:Tag',
             'choice_label'=>'name',
         ]);
-        /*$builder->add('comment',TextareaType::class,array(
-            'attr'=>array('class'=>'comment'),
-        ));*/
+        $builder->add('comment');
 
+        /*$builder->add('comment', TextareaType::class, array(
+            'attr' => array('class' => 'comment'),
+        ));*/
         $builder->add('visibility', ChoiceType::class, array(
             'choices'  => array(
                 'Private' => 0,
                 'Public' => 1,
             ),
+        ));
+        $builder->add('summaryImage', FIleType::class, array(
+            'data_class' => null,
+        ));
+
+        $builder->add('date', DateTimeType::class, array(
+            'placeholder' => array(
+                'placeholder' => 'Select a value',
+            )
         ));
     }
     

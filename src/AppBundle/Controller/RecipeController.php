@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\Collection;
 
+
 /**
  * Recipe controller.
  *
@@ -78,7 +79,7 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $recipes = $em->getRepository('AppBundle:Recipe')->findOneByIdJoinedToTag();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findDateASC();
 
         return $this->render('recipe/search.html.twig', array(
             'recipes' => $recipes,
