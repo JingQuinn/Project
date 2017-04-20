@@ -33,6 +33,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT r FROM AppBundle:recipe r ORDER BY r.date ASC'
+
             )
             ->getResult();
     }

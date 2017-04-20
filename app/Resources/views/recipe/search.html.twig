@@ -3,7 +3,7 @@
     @import '/css/table.css';
 {% endblock %}
 {% block body %}
-    <h1>Search</h1>
+    <h1>List of recipes by date ascendant</h1>
 
     <table>
         <thead>
@@ -18,7 +18,6 @@
             <th>Votup</th>
             <th>Tag</th>
             <th>Comment</th>
-            <th>date</th>
         </tr>
         </thead>
         <tbody>
@@ -34,20 +33,6 @@
                 <td>{{ recipe.votUp }}</td>
                 <td>{{ recipe.tag }}</td>
                 <td>{{ recipe.comment }}</td>
-                <td>{{ recipe.date }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">edit</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('comment_index') }}">Add Comment</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
