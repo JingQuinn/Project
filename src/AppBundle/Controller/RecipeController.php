@@ -30,6 +30,7 @@ class RecipeController extends Controller
 
         $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
 
+
         return $this->render('recipe/index.html.twig', array(
             'recipes' => $recipes,
         ));

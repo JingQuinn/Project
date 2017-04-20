@@ -14,15 +14,14 @@
             <th>Id</th>
             <th>Title</th>
             <th>Summary</th>
-            <th>Summary Image</th>
             <th>Steps</th>
-            <th>Steps Image</th>
             <th>Ingredients</th>
             <th>Author</th>
             <th>Tag</th>
             <th>Comment</th>
             <th>Vote Up</th>
             <th>Vote Down</th>
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
@@ -31,15 +30,14 @@
                 <td>{{ recipe.id }}</td>
                 <td>{{ recipe.title }}</td>
                 <td>{{ recipe.summary }}</td>
-                <td>{{ recipe.summaryImage }}</td>
                 <td>{{ recipe.steps }}</td>
-                <td>{{ recipe.stepImage }}</td>
                 <td>{{ recipe.ingredients }}</td>
                 <td>{{ recipe.author }}</td>
                 <td>{{ recipe.tag }}</td>
                 <td>{{ recipe.comment }}</td>
                 <td>{{ recipe.votUp }}</td>
                 <td>{{ recipe.votDown }}</td>
+                <td>{{ recipe.date }}</td>
             </tr>
         {% endfor %}
         </tbody>

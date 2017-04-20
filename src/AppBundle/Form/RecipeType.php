@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Repository\RecipeRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,8 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Doctrine\ORM\EntityRepository;
 
 class RecipeType extends AbstractType
 {
@@ -30,7 +31,11 @@ class RecipeType extends AbstractType
         ));
         $builder->add('ingredients')->add('author')->add('votDown')->add('votUp')       ;
         $builder->add('tag',EntityType::class,[
+            'placeholder'=>'Choose a Tag',
             'class'=>'AppBundle:Tag',
+            //'query_builder'=>function(RecipeRepository $repo){
+              //  return $repo->createAlphabeticalQueryBuilder();
+            //}
             'choice_label'=>'name',
         ]);
         $builder->add('comment');
@@ -44,14 +49,9 @@ class RecipeType extends AbstractType
                 'Public' => 1,
             ),
         ));
-        $builder->add('summaryImage', FIleType::class, array(
-            'data_class' => null,
-        ));
 
-        $builder->add('date', DateTimeType::class, array(
-            'placeholder' => array(
-                'placeholder' => 'Select a value',
-            )
+        $builder->add('date', DateType::class, array(
+            'widget'=>'single_text',
         ));
     }
     

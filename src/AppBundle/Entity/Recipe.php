@@ -194,16 +194,16 @@ class Recipe
     }
 
     /**
-     * @var datetime
+     * @var date
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
-     * Get datetime
+     * Get date
      *
-     * @return datetime
+     * @return date
      */
     public function getDate()
     {
@@ -211,9 +211,9 @@ class Recipe
     }
 
     /**
-     * Set datetime
+     * Set date
      *
-     * @param datetime $date
+     * @param date $date
      *
      * @return Recipe
      */

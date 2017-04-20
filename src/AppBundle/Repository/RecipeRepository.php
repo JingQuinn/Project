@@ -37,6 +37,10 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    /*public function createAlphabeticalQueryBuilder(){
+        return $this->createAlphabeticalQueryBuilder('tag')
+            ->orderBy('recipe.tag','ASC');
+    }*/
 
     public function findOneByIdJoinedToTag()
     {
