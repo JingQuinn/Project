@@ -2,22 +2,25 @@
 # http://symfony.com/doc/current/security.html
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
             memory:
               users:
+                  jing:
+                      password:  $2y$12$adDOGsITZ1ByUQi0ABalLeMnnXQicTOty/BmRjBDsiPXjKMEtqbAi
+                      roles: 'ROLE_USER'
                   user:
-                      password: user
+                      password:  $2y$12$qgGs2HHZwkPChxmgdVpbKOHOydqgPpMApsKnMZT.ZNGAQv584Rwj.
                       roles: 'ROLE_USER'
                   admin:
-                      password: admin
+                      password: $2y$12$Z9bHqSpEBmfxUNo7lBWIxO.UpXhi1aVsAu7befOpeEr0/95qO2mkO
                       roles: 'ROLE_ADMIN'
-                  jing:
-                      password: jing
-                      roles: 'ROLE_ADMIN'
+
 
 
     firewalls:

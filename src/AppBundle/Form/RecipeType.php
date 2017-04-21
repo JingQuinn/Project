@@ -33,6 +33,7 @@ class RecipeType extends AbstractType
         $builder->add('tag',EntityType::class,[
             'placeholder'=>'Choose a Tag',
             'class'=>'AppBundle:Tag',
+
             //'query_builder'=>function(RecipeRepository $repo){
               //  return $repo->createAlphabeticalQueryBuilder();
             //}
