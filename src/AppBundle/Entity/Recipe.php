@@ -116,9 +116,9 @@ class Recipe
      *
      * @return Recipe
      */
-    public function setSummaryImage(File $file = null)
+    public function setSummaryImage($summaryImage)
     {
-        $this->summaryImage = $file;
+        $this->summaryImage = $summaryImage;
 
         //return $this;
     }
@@ -154,9 +154,9 @@ class Recipe
      *
      * @return Recipe
      */
-    public function setStepImage(File $file = null)
+    public function setStepImage($stepImage)
     {
-        $this->stepImage = $file;
+        $this->stepImage = $stepImage;
 
         //return $this;
     }
@@ -196,31 +196,61 @@ class Recipe
     /**
      * @var date
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="createDate", type="date")
      */
-    private $date;
+    private $createDate;
 
     /**
-     * Get date
+     * Get create date
      *
-     * @return date
+     * @return createDate
      */
-    public function getDate()
+    public function getCreateDate()
     {
-        return $this->date;
+        return $this->createDate;
     }
 
     /**
-     * Set date
+     * Set create date
      *
-     * @param date $date
+     * @param createDate $createDate
      *
      * @return Recipe
      */
-    public function setDate($date)
+    public function setCreateDate($createDate)
     {
-        $this->date = $date;
+        $this->createDate = $createDate;
     }
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="editDate", type="date")
+     */
+    private $editDate;
+
+    /**
+     * Get edit date
+     *
+     * @return editDate
+     */
+    public function getEditDate()
+    {
+        return $this->editDate;
+    }
+
+    /**
+     * Set edit date
+     *
+     * @param editDate $editDate
+     *
+     * @return Recipe
+     */
+    public function setEditDate($editDate)
+    {
+        $this->editDate = $editDate;
+    }
+
 
     /**
      * Get id

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Recipe;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,9 +81,26 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $recipes = $em->getRepository('AppBundle:Recipe')->findDateASC();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findCreateDateDESC();
 
         return $this->render('recipe/search.html.twig', array(
+            'recipes' => $recipes,
+        ));
+    }
+
+    /**
+     * Lists all recipe entities.
+     *
+     * @Route("/searchEditDate", name="recipe_searchEditDate")
+     * @Method("GET")
+     */
+    public function searchEditDateAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $recipes = $em->getRepository('AppBundle:Recipe')->findEditDateDESC();
+
+        return $this->render('recipe/searchEditDate.html.twig', array(
             'recipes' => $recipes,
         ));
     }
@@ -99,6 +117,37 @@ class RecipeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $recipe->getSummaryImage();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('images_directory'),
+                $fileName
+            );
+
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $recipe->setSummaryImage($fileName);
+
+            $file1 = $recipe->getStepImage();
+
+            // Generate a unique name for the file before saving it
+            $fileName1 = md5(uniqid()).'.'.$file1->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file1->move(
+                $this->getParameter('images_directory'),
+                $fileName1
+            );
+
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $recipe->setStepImage($fileName1);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($recipe);
             $em->flush($recipe);
@@ -142,6 +191,35 @@ class RecipeController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $file = $recipe->getSummaryImage();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('images_directory'),
+                $fileName
+            );
+
+
+            $file1 = $recipe->getStepImage();
+
+            // Generate a unique name for the file before saving it
+            $fileName1 = md5(uniqid()).'.'.$file1->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file1->move(
+                $this->getParameter('images_directory'),
+                $fileName1
+            );
+
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $recipe->setSummaryImage($fileName);
+            $recipe->setStepImage($fileName1);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('recipe_edit', array('id' => $recipe->getId()));

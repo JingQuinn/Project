@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Repository\RecipeRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,18 +30,25 @@ class RecipeType extends AbstractType
         $builder->add('stepImage', FIleType::class, array(
             'data_class' => null,
         ));
-        $builder->add('ingredients')->add('author')->add('votDown')->add('votUp')       ;
+        $builder->add('ingredients')->add('author');
+        $builder->add('votDown', IntegerType::class,['attr'=>['step'=>'5','min'=>'-100','max'=>'0']]);
+        $builder->add('votUp',IntegerType::class,['attr'=>['step'=>'5','min'=>'0','max'=>'100']])       ;
         $builder->add('tag',EntityType::class,[
             'placeholder'=>'Choose a Tag',
             'class'=>'AppBundle:Tag',
-
             //'query_builder'=>function(RecipeRepository $repo){
               //  return $repo->createAlphabeticalQueryBuilder();
             //}
             'choice_label'=>'name',
         ]);
-        $builder->add('comment');
-
+        $builder->add('comment',EntityType::class,[
+            'placeholder'=>'Choose a Comment',
+            'class'=>'AppBundle:Comment',
+            //'query_builder'=>function(RecipeRepository $repo){
+            //  return $repo->createAlphabeticalQueryBuilder();
+            //}
+            'choice_label'=>'name',
+        ]);
         /*$builder->add('comment', TextareaType::class, array(
             'attr' => array('class' => 'comment'),
         ));*/
@@ -50,8 +58,10 @@ class RecipeType extends AbstractType
                 'Public' => 1,
             ),
         ));
-
-        $builder->add('date', DateType::class, array(
+        $builder->add('createDate', DateType::class, array(
+            'widget'=>'single_text',
+        ));
+        $builder->add('editDate', DateType::class, array(
             'widget'=>'single_text',
         ));
     }

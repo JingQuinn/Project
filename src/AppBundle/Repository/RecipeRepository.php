@@ -28,11 +28,21 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function findDateASC()
+    public function findCreateDateDESC()
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT r FROM AppBundle:recipe r ORDER BY r.date ASC'
+                'SELECT r FROM AppBundle:recipe r ORDER BY r.createDate DESC'
+
+            )
+            ->getResult();
+    }
+
+    public function findEditDateDESC()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT r FROM AppBundle:recipe r ORDER BY r.editDate DESC'
 
             )
             ->getResult();

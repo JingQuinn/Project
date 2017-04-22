@@ -3,7 +3,7 @@
     @import '/css/table.css';
 {% endblock %}
 {% block body %}
-    <h1>List of recipes by date ascendant</h1>
+    <h1>List of recipes by Created Date in Descendant order</h1>
 
     <table>
         <thead>
@@ -18,6 +18,7 @@
             <th>Votup</th>
             <th>Tag</th>
             <th>Comment</th>
+            <th>Created Date</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 <td>{{ recipe.votUp }}</td>
                 <td>{{ recipe.tag }}</td>
                 <td>{{ recipe.comment }}</td>
+                <td>{{ recipe.createDate|date('Y-m-d') }}</td>
             </tr>
         {% endfor %}
         </tbody>
