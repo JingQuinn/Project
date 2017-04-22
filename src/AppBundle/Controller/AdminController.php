@@ -19,20 +19,6 @@ class AdminController extends Controller{
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction(Request $request){
-        /*$session = new Session();
-
-        if($session->has('user')){
-            $templateName = '/admin/index';
-            return $this->render($templateName.'.html.twig',[]);
-        }
-
-        $session->getFlashBag()->clear();
-        $this->addFlash(
-            'error',
-            'please login before accessing admin'
-        );
-
-        return $this->redirectToRoute('login');*/
         $templateName = '/admin/index';
         return $this->render($templateName.'.html.twig');
     }
